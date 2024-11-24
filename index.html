@@ -5,9 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Miss Peach Application</title>
   <style>
+    /* General Styles */
     body {
       font-family: Arial, sans-serif;
       background-color: #000000;
+      background-image: url('your-image.png'); /* Replace with your image file */
+      background-size: cover; /* Cover the entire screen */
+      background-position: center;
+      background-repeat: no-repeat;
       color: #ffffff;
       margin: 0;
       padding: 0;
@@ -18,8 +23,8 @@
       overflow: hidden;
     }
 
-    .form-container {
-      background: rgba(255, 255, 255, 0.1); /* Transparent bubble effect */
+    .form-container, .welcome-container {
+      background: rgba(0, 0, 0, 0.8); /* Semi-transparent black bubble */
       border-radius: 20px;
       padding: 30px;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
@@ -30,7 +35,7 @@
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
-    .form-container.active {
+    .welcome-container.active, .form-container.active {
       display: block; /* Show active page */
       opacity: 1;
     }
@@ -80,8 +85,16 @@
   </style>
 </head>
 <body>
+  <!-- Welcome Page -->
+  <div class="welcome-container active" id="welcome">
+    <h1>Adult Content Warning</h1>
+    <p>This page contains adult content. You must be 18 years or older to access this site.</p>
+    <button onclick="startForm()">I am 18 or older</button>
+    <button onclick="redirectAway()">I am under 18</button>
+  </div>
+
   <!-- Form Pages -->
-  <div class="form-container active" id="page-1">
+  <div class="form-container" id="page-1">
     <h1>Welcome to my world</h1>
     <label for="name">What's your preferred name or pet names?</label>
     <textarea id="name" name="name" rows="2" placeholder="Add any names you may dislike being called"></textarea>
@@ -173,6 +186,11 @@
   <script>
     let currentPage = 1;
 
+    function startForm() {
+      document.getElementById('welcome').classList.remove('active');
+      document.getElementById(`page-1`).classList.add('active');
+    }
+
     function nextPage(page) {
       document.getElementById(`page-${currentPage}`).classList.remove('active');
       currentPage = page;
@@ -183,6 +201,10 @@
       document.getElementById(`page-${currentPage}`).classList.remove('active');
       currentPage = page;
       document.getElementById(`page-${currentPage}`).classList.add('active');
+    }
+
+    function redirectAway() {
+      window.location.href = "https://www.google.com"; // Replace with a safe URL
     }
 
     function submitForm() {
