@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,53 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Miss Peach Sub Application</title>
   <style>
+    /* General Styles */
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #4b0082; /* Indigo background */
       margin: 0;
       padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      color: #ffffff; /* White text */
     }
+
     .form-container {
-      background: #ffffff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+      backdrop-filter: blur(10px); /* Blurry glass effect */
+      border-radius: 30px; /* Bubble-like rounding */
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); /* Smooth shadow */
       width: 100%;
-      max-width: 600px;
+      max-width: 500px;
     }
+
     h1 {
       text-align: center;
       margin-bottom: 20px;
-      color: #333;
+      font-size: 2em;
     }
+
     label {
       display: block;
-      margin-top: 10px;
+      margin-top: 15px;
+      margin-bottom: 5px;
       font-weight: bold;
+      font-size: 1.1em;
     }
+
     input, textarea, select {
       width: 100%;
-      padding: 10px;
+      padding: 15px;
       margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      border: none;
+      border-radius: 20px;
+      background-color: rgba(255, 255, 255, 0.2); /* Light transparency */
+      color: #fff;
+      font-size: 1em;
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+      outline: none;
+      transition: 0.3s ease;
     }
+
+    input:focus, textarea:focus, select:focus {
+      background-color: rgba(255, 255, 255, 0.3); /* Slightly brighter on focus */
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4); /* Glow effect */
+    }
+
     button {
       width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: #fff;
+      padding: 15px;
+      background-color: #ff4500; /* Bright orange for contrast */
+      color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
       cursor: pointer;
-      font-size: 16px;
+      transition: 0.3s ease;
     }
+
     button:hover {
-      background-color: #0056b3;
+      background-color: #e63e00; /* Darker orange on hover */
+      box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4); /* Hover glow effect */
     }
   </style>
 </head>
@@ -61,6 +85,7 @@
     <h1>Miss Peach Sub Application</h1>
     <form name="sub-application" method="POST" data-netlify="true">
       <input type="hidden" name="form-name" value="sub-application">
+      
       <label for="name">Name or Pseudonym</label>
       <input type="text" id="name" name="name" required>
 
