@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Miss Peach Sub Application</title>
+  <title>Adult Content Warning</title>
   <style>
     /* General Styles */
     body {
@@ -13,56 +13,29 @@
       padding: 0;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
       min-height: 100vh;
       color: #ffffff; /* White text */
-      background-image: url('your-image.jpg'); /* Replace with the image URL */
-      background-size: cover; /* Ensure the image covers the entire background */
-      background-position: center;
-      background-attachment: fixed;
+      text-align: center;
     }
 
-    .form-container {
-      background: rgba(0, 0, 0, 0.8); /* Semi-transparent black for the form */
-      border-radius: 30px; /* Bubble-like rounding */
+    .warning-container {
+      background: rgba(0, 0, 0, 0.9); /* Semi-transparent black */
+      border-radius: 20px;
       padding: 40px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.9); /* Smooth shadow */
-      width: 100%;
+      width: 90%;
       max-width: 500px;
-      margin: 20px; /* Adds spacing from the top */
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); /* Shadow for depth */
     }
 
     h1 {
-      text-align: center;
-      margin-bottom: 20px;
       font-size: 2em;
+      margin-bottom: 20px;
     }
 
-    label {
-      display: block;
-      margin-top: 15px;
-      margin-bottom: 5px;
-      font-weight: bold;
-      font-size: 1.1em;
-    }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 15px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 20px;
-      background-color: rgba(255, 255, 255, 0.2); /* Light transparency */
-      color: #fff;
-      font-size: 1em;
-      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
-      outline: none;
-      transition: 0.3s ease;
-    }
-
-    input:focus, textarea:focus, select:focus {
-      background-color: rgba(255, 255, 255, 0.3); /* Slightly brighter on focus */
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4); /* Glow effect */
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
     }
 
     button {
@@ -75,6 +48,7 @@
       font-size: 1.2em;
       font-weight: bold;
       cursor: pointer;
+      margin: 10px 0;
       transition: 0.3s ease;
     }
 
@@ -85,58 +59,23 @@
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h1>Miss Peach Sub Application</h1>
-    <form name="sub-application" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="sub-application">
-      
-      <label for="name">Name or Pseudonym</label>
-      <input type="text" id="name" name="name" required>
-
-      <label for="age">Age</label>
-      <input type="number" id="age" name="age" required>
-
-      <label for="gender">Gender Identity</label>
-      <select id="gender" name="gender" required>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Non-binary">Non-binary</option>
-        <option value="Other">Other</option>
-      </select>
-
-      <label for="location">Location</label>
-      <input type="text" id="location" name="location" required>
-
-      <label for="contact">Contact Information</label>
-      <input type="email" id="contact" name="contact" required>
-
-      <label for="experience">Experience Level</label>
-      <select id="experience" name="experience" required>
-        <option value="Beginner">Beginner</option>
-        <option value="Intermediate">Intermediate</option>
-        <option value="Experienced">Experienced</option>
-      </select>
-
-      <label for="dynamic">Desired Dynamic</label>
-      <textarea id="dynamic" name="dynamic" rows="4" required></textarea>
-
-      <label for="kinks">Kinks and Interests</label>
-      <textarea id="kinks" name="kinks" rows="4"></textarea>
-
-      <label for="limits">Soft and Hard Limits</label>
-      <textarea id="limits" name="limits" rows="4" required></textarea>
-
-      <label for="availability">Availability</label>
-      <textarea id="availability" name="availability" rows="4"></textarea>
-
-      <label for="consent">Do you agree to keep all interactions consensual?</label>
-      <select id="consent" name="consent" required>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
-
-      <button type="submit">Submit Application</button>
-    </form>
+  <div class="warning-container">
+    <h1>Adult Content Warning</h1>
+    <p>This page contains adult content. You must be 18 years or older to access this site.</p>
+    <button onclick="confirmAge()">I am 18 or older</button>
+    <button onclick="redirectAway()">I am under 18</button>
   </div>
+
+  <script>
+    // Redirects to the form if user confirms they are 18+
+    function confirmAge() {
+      window.location.href = "index.html"; // Change to the form page's filename if needed
+    }
+
+    // Redirects to another page if user is under 18
+    function redirectAway() {
+      window.location.href = "https://www.google.com"; // Replace with your desired safe URL
+    }
+  </script>
 </body>
 </html>
