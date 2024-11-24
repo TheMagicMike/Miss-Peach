@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miss Peach Sub Application</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Miss Peach Sub Application</h1>
+    <form name="sub-application" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="sub-application">
+      <label for="name">Name or Pseudonym</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" required>
+
+      <label for="gender">Gender Identity</label>
+      <select id="gender" name="gender" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Non-binary">Non-binary</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" required>
+
+      <label for="contact">Contact Information</label>
+      <input type="email" id="contact" name="contact" required>
+
+      <label for="experience">Experience Level</label>
+      <select id="experience" name="experience" required>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Experienced">Experienced</option>
+      </select>
+
+      <label for="dynamic">Desired Dynamic</label>
+      <textarea id="dynamic" name="dynamic" rows="4" required></textarea>
+
+      <label for="kinks">Kinks and Interests</label>
+      <textarea id="kinks" name="kinks" rows="4"></textarea>
+
+      <label for="limits">Soft and Hard Limits</label>
+      <textarea id="limits" name="limits" rows="4" required></textarea>
+
+      <label for="availability">Availability</label>
+      <textarea id="availability" name="availability" rows="4"></textarea>
+
+      <label for="consent">Do you agree to keep all interactions consensual?</label>
+      <select id="consent" name="consent" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <button type="submit">Submit Application</button>
+    </form>
+  </div>
+</body>
+</html>
