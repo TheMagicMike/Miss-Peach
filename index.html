@@ -8,24 +8,28 @@
     /* General Styles */
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #4b0082; /* Indigo background */
+      background-color: #000000; /* Black background */
       margin: 0;
       padding: 0;
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
+      align-items: flex-start;
+      min-height: 100vh;
       color: #ffffff; /* White text */
+      background-image: url('your-image.jpg'); /* Replace with the image URL */
+      background-size: cover; /* Ensure the image covers the entire background */
+      background-position: center;
+      background-attachment: fixed;
     }
 
     .form-container {
-      background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
-      backdrop-filter: blur(10px); /* Blurry glass effect */
+      background: rgba(0, 0, 0, 0.8); /* Semi-transparent black for the form */
       border-radius: 30px; /* Bubble-like rounding */
       padding: 40px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); /* Smooth shadow */
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.9); /* Smooth shadow */
       width: 100%;
       max-width: 500px;
+      margin: 20px; /* Adds spacing from the top */
     }
 
     h1 {
