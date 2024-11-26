@@ -31,11 +31,16 @@
       background-size: cover; /* Fill the screen */
       background-repeat: no-repeat;
       background-position: center;
-      opacity: 0.375; /* Increased visibility */
+      opacity: 0.375; /* Adjusted visibility */
       z-index: -1; /* Ensures the image stays behind content */
     }
 
+    /* Container Styles */
     .form-container, .welcome-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       background: rgba(0, 0, 0, 0.8); /* Semi-transparent black bubble */
       border-radius: 20px;
       padding: 30px;
@@ -44,26 +49,23 @@
       max-width: 600px;
       text-align: center;
       display: none; /* Initially hidden */
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center; /* Central alignment */
+      opacity: 0; /* For smooth transitions */
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
-    .welcome-container.active, .form-container.active {
-      display: flex; /* Show active page */
-      opacity: 1;
+    .form-container.active, .welcome-container.active {
+      display: block;
+      opacity: 1; /* Fully visible */
+      visibility: visible;
     }
 
     h1, label, p {
       margin-bottom: 20px;
-      text-align: center; /* Text alignment centrally */
+      text-align: center;
     }
 
     textarea, select, button {
-      width: 80%; /* Symmetrical alignment */
+      width: 80%; /* Central alignment */
       padding: 15px;
       margin: 10px 0;
       border: none;
@@ -200,7 +202,8 @@
 
     function startForm() {
       document.getElementById('welcome').classList.remove('active');
-      document.getElementById(`page-1`).classList.add('active');
+      document.getElementById('welcome').style.display = "none";
+      document.getElementById(`page-${currentPage}`).classList.add('active');
     }
 
     function nextPage(page) {
@@ -224,4 +227,3 @@
     }
   </script>
 </body>
-</html>
