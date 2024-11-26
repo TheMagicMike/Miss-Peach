@@ -156,6 +156,17 @@
 
   <!-- Page 5 -->
   <div class="page-container" id="page-5">
+    <h1>Your Kinks</h1>
+    <label for="kinks">Tell me your main kinks:</label>
+    <textarea id="kinks" name="kinks" rows="3" placeholder="Feel free to be detailed"></textarea>
+    <div class="navigation">
+      <button onclick="showPage('page-4')">Back</button>
+      <button onclick="showPage('page-6')">Next</button>
+    </div>
+  </div>
+
+  <!-- Page 6 -->
+  <div class="page-container" id="page-6">
     <h1>Minimum Weekly Budget</h1>
     <label for="budget">What is your minimum weekly budget?</label>
     <select id="budget" name="budget">
@@ -166,17 +177,6 @@
       <option value="500+">$500+</option>
     </select>
     <div class="navigation">
-      <button onclick="showPage('page-4')">Back</button>
-      <button onclick="showPage('page-6')">Next</button>
-    </div>
-  </div>
-
-  <!-- Page 6 -->
-  <div class="page-container" id="page-6">
-    <h1>Questions Before Payment</h1>
-    <label>You may ask up to 3 SFW questions before payment:</label>
-    <textarea id="questions" name="questions" rows="3"></textarea>
-    <div class="navigation">
       <button onclick="showPage('page-5')">Back</button>
       <button onclick="showPage('page-7')">Next</button>
     </div>
@@ -184,10 +184,21 @@
 
   <!-- Page 7 -->
   <div class="page-container" id="page-7">
+    <h1>Questions Before Payment</h1>
+    <label>You may ask up to 3 SFW questions before payment:</label>
+    <textarea id="questions" name="questions" rows="3"></textarea>
+    <div class="navigation">
+      <button onclick="showPage('page-6')">Back</button>
+      <button onclick="showPage('page-8')">Next</button>
+    </div>
+  </div>
+
+  <!-- Page 8 -->
+  <div class="page-container" id="page-8">
     <h1>Age Verification</h1>
     <p>If accepted, you must be willing to age verify immediately with an app, adult site, or redacted ID. Confirm you will age verify:</p>
     <div class="navigation">
-      <button onclick="showPage('page-6')">Back</button>
+      <button onclick="showPage('page-7')">Back</button>
       <button onclick="submitForm()">Submit Application</button>
     </div>
   </div>
@@ -211,7 +222,3 @@
 
     function submitForm() {
       showPage('submission-page'); // Show submission confirmation page
-    }
-  </script>
-</body>
-</html>
