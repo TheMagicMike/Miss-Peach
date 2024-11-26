@@ -209,7 +209,7 @@
     function startForm() {
       document.getElementById('welcome').classList.remove('active');
       document.getElementById('welcome').style.display = "none";
-      document.getElementById(`page-${currentPage}`).classList.add('active');
+      document.getElementById('page-1').classList.add('active');
     }
 
     function nextPage(page) {
@@ -219,4 +219,6 @@
     }
 
     function prevPage(page) {
-      document.getElementById(`page-${currentPage
+      document.getElementById(`page-${currentPage}`).classList.remove('active');
+      currentPage = page;
+      document.getElementById(`page-${current
