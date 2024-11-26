@@ -28,36 +28,35 @@
       width: 100%;
       height: 100%;
       background-image: url('your-image.png'); /* Replace with your image file */
-      background-size: cover; /* Fill the screen */
+      background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-      opacity: 0.375; /* Adjusted visibility */
-      z-index: -1; /* Ensures the image stays behind content */
+      opacity: 0.375;
+      z-index: -1;
     }
 
-    /* Container Styles */
+    /* Page Container */
     .page-container {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.8); /* Semi-transparent black bubble */
+      background: rgba(0, 0, 0, 0.8);
       border-radius: 20px;
       padding: 30px;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
       width: 90%;
       max-width: 600px;
       text-align: center;
-      display: none; /* All pages hidden by default */
+      display: none;
     }
 
     .page-container.active {
-      display: block; /* Show the active page */
+      display: block;
     }
 
     h1, p, label {
       margin-bottom: 20px;
-      text-align: center;
     }
 
     textarea, select, button {
@@ -92,7 +91,6 @@
     }
 
     .navigation button {
-      width: auto;
       margin: 0 10px;
     }
   </style>
@@ -106,7 +104,7 @@
     <button onclick="redirectAway()">I am under 18</button>
   </div>
 
-  <!-- Form Pages -->
+  <!-- Page 1 -->
   <div class="page-container" id="page-1">
     <h1>Welcome to my world</h1>
     <label for="name">What's your preferred name?</label>
@@ -116,6 +114,7 @@
     </div>
   </div>
 
+  <!-- Page 2 -->
   <div class="page-container" id="page-2">
     <h1>Dislikes and Limits</h1>
     <label for="dislikes">Tell me names you dislike and also any limits you have in general:</label>
@@ -126,6 +125,7 @@
     </div>
   </div>
 
+  <!-- Page 3 -->
   <div class="page-container" id="page-3">
     <h1>Your Socials</h1>
     <label for="socials">Your Reddit, X, or Discord username(s):</label>
@@ -136,6 +136,7 @@
     </div>
   </div>
 
+  <!-- Page 4 -->
   <div class="page-container" id="page-4">
     <h1>Payment Methods</h1>
     <label for="payment">Which of My payment methods will you use?</label>
@@ -153,22 +154,63 @@
     </div>
   </div>
 
+  <!-- Page 5 -->
   <div class="page-container" id="page-5">
+    <h1>Minimum Weekly Budget</h1>
+    <label for="budget">What is your minimum weekly budget?</label>
+    <select id="budget" name="budget">
+      <option value="25-50">$25-50</option>
+      <option value="50-75">$50-75</option>
+      <option value="75-250">$75-250</option>
+      <option value="250-500">$250-500</option>
+      <option value="500+">$500+</option>
+    </select>
+    <div class="navigation">
+      <button onclick="showPage('page-4')">Back</button>
+      <button onclick="showPage('page-6')">Next</button>
+    </div>
+  </div>
+
+  <!-- Page 6 -->
+  <div class="page-container" id="page-6">
+    <h1>Questions Before Payment</h1>
+    <label>You may ask up to 3 SFW questions before payment:</label>
+    <textarea id="questions" name="questions" rows="3"></textarea>
+    <div class="navigation">
+      <button onclick="showPage('page-5')">Back</button>
+      <button onclick="showPage('page-7')">Next</button>
+    </div>
+  </div>
+
+  <!-- Page 7 -->
+  <div class="page-container" id="page-7">
+    <h1>Age Verification</h1>
+    <p>If accepted, you must be willing to age verify immediately with an app, adult site, or redacted ID. Confirm you will age verify:</p>
+    <div class="navigation">
+      <button onclick="showPage('page-6')">Back</button>
+      <button onclick="submitForm()">Submit Application</button>
+    </div>
+  </div>
+
+  <!-- Submission Confirmation Page -->
+  <div class="page-container" id="submission-page">
     <h1>Well Done for Taking the First Step</h1>
     <p>Welcome to the World of Miss Peach! If you are one of the lucky ones chosen, she will be in touch when it is convenient for her.</p>
   </div>
 
   <script>
-    // Function to show the requested page
     function showPage(pageId) {
-      const allPages = document.querySelectorAll('.page-container');
-      allPages.forEach(page => page.classList.remove('active')); // Hide all pages
+      const pages = document.querySelectorAll('.page-container');
+      pages.forEach(page => page.classList.remove('active')); // Hide all pages
       document.getElementById(pageId).classList.add('active'); // Show the requested page
     }
 
-    // Redirect function for underage users
     function redirectAway() {
       window.location.href = "https://www.google.com"; // Replace with a safe URL
+    }
+
+    function submitForm() {
+      showPage('submission-page'); // Show submission confirmation page
     }
   </script>
 </body>
