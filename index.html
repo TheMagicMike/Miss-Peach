@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Miss Peach Application</title>
   <style>
-    /* General Styles */
     body {
       font-family: Arial, sans-serif;
       background-color: #000000;
@@ -19,7 +18,6 @@
       overflow: hidden;
     }
 
-    /* Background Image */
     body::before {
       content: "";
       position: absolute;
@@ -27,36 +25,31 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('your-image.png'); /* Replace with your image file */
+      background-image: url('your-image.png');
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-      opacity: 0.375;
+      opacity: 0.35;
       z-index: -1;
     }
 
-    /* Page Container */
-    .page-container {
+    .page {
+      display: none;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.8);
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
       width: 90%;
       max-width: 600px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 30px;
+      border-radius: 20px;
       text-align: center;
-      display: none;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     }
 
-    .page-container.active {
+    .page.active {
       display: block;
-    }
-
-    h1, p, label {
-      margin-bottom: 20px;
     }
 
     textarea, select, button {
@@ -69,8 +62,6 @@
       color: #fff;
       font-size: 1em;
       box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
-      outline: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     button {
@@ -83,64 +74,48 @@
     button:hover {
       background-color: #0056b3;
     }
-
-    .navigation {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .navigation button {
-      margin: 0 10px;
-    }
   </style>
 </head>
 <body>
   <!-- Welcome Page -->
-  <div class="page-container active" id="welcome-page">
+  <div class="page active" id="page-0">
     <h1>Welcome to the World of Miss Peach</h1>
     <p>This page contains adult content. You must be 18 years or older to access this site.</p>
-    <button onclick="showPage('page-1')">I am 18 or older</button>
+    <button onclick="goToPage(1)">I am 18 or older</button>
     <button onclick="redirectAway()">I am under 18</button>
   </div>
 
   <!-- Page 1 -->
-  <div class="page-container" id="page-1">
+  <div class="page" id="page-1">
     <h1>Welcome to my world</h1>
     <label for="name">What's your preferred name?</label>
-    <textarea id="name" name="name" rows="2" placeholder="List all names or pet names you like"></textarea>
-    <div class="navigation">
-      <button onclick="showPage('page-2')">Next</button>
-    </div>
+    <textarea id="name" rows="2" placeholder="List all names or pet names you like"></textarea>
+    <button onclick="goToPage(2)">Next</button>
   </div>
 
   <!-- Page 2 -->
-  <div class="page-container" id="page-2">
+  <div class="page" id="page-2">
     <h1>Dislikes and Limits</h1>
     <label for="dislikes">Tell me names you dislike and also any limits you have in general:</label>
-    <textarea id="dislikes" name="dislikes" rows="3" placeholder="Feel free to be detailed"></textarea>
-    <div class="navigation">
-      <button onclick="showPage('page-1')">Back</button>
-      <button onclick="showPage('page-3')">Next</button>
-    </div>
+    <textarea id="dislikes" rows="3" placeholder="Feel free to be detailed"></textarea>
+    <button onclick="goToPage(1)">Back</button>
+    <button onclick="goToPage(3)">Next</button>
   </div>
 
   <!-- Page 3 -->
-  <div class="page-container" id="page-3">
+  <div class="page" id="page-3">
     <h1>Your Socials</h1>
     <label for="socials">Your Reddit, X, or Discord username(s):</label>
-    <textarea id="socials" name="socials" rows="2" placeholder="Include Telegram if applicable"></textarea>
-    <div class="navigation">
-      <button onclick="showPage('page-2')">Back</button>
-      <button onclick="showPage('page-4')">Next</button>
-    </div>
+    <textarea id="socials" rows="2" placeholder="Include Telegram if applicable"></textarea>
+    <button onclick="goToPage(2)">Back</button>
+    <button onclick="goToPage(4)">Next</button>
   </div>
 
   <!-- Page 4 -->
-  <div class="page-container" id="page-4">
+  <div class="page" id="page-4">
     <h1>Payment Methods</h1>
     <label for="payment">Which of My payment methods will you use?</label>
-    <select id="payment" name="payment">
+    <select id="payment">
       <option value="tributify">Tributify</option>
       <option value="throne">Throne</option>
       <option value="revolut">Revolut</option>
@@ -148,74 +123,70 @@
       <option value="loyalfans">LoyalFans</option>
       <option value="crypto">Crypto</option>
     </select>
-    <div class="navigation">
-      <button onclick="showPage('page-3')">Back</button>
-      <button onclick="showPage('page-5')">Next</button>
-    </div>
+    <button onclick="goToPage(3)">Back</button>
+    <button onclick="goToPage(5)">Next</button>
   </div>
 
   <!-- Page 5 -->
-  <div class="page-container" id="page-5">
+  <div class="page" id="page-5">
     <h1>Your Kinks</h1>
     <label for="kinks">Tell me your main kinks:</label>
-    <textarea id="kinks" name="kinks" rows="3" placeholder="Feel free to be detailed"></textarea>
-    <div class="navigation">
-      <button onclick="showPage('page-4')">Back</button>
-      <button onclick="showPage('page-6')">Next</button>
-    </div>
+    <textarea id="kinks" rows="3" placeholder="Feel free to be detailed"></textarea>
+    <button onclick="goToPage(4)">Back</button>
+    <button onclick="goToPage(6)">Next</button>
   </div>
 
   <!-- Page 6 -->
-  <div class="page-container" id="page-6">
+  <div class="page" id="page-6">
     <h1>Minimum Weekly Budget</h1>
     <label for="budget">What is your minimum weekly budget?</label>
-    <select id="budget" name="budget">
+    <select id="budget">
       <option value="25-50">$25-50</option>
       <option value="50-75">$50-75</option>
       <option value="75-250">$75-250</option>
       <option value="250-500">$250-500</option>
       <option value="500+">$500+</option>
     </select>
-    <div class="navigation">
-      <button onclick="showPage('page-5')">Back</button>
-      <button onclick="showPage('page-7')">Next</button>
-    </div>
+    <button onclick="goToPage(5)">Back</button>
+    <button onclick="goToPage(7)">Next</button>
   </div>
 
   <!-- Page 7 -->
-  <div class="page-container" id="page-7">
+  <div class="page" id="page-7">
     <h1>Questions Before Payment</h1>
     <label>You may ask up to 3 SFW questions before payment:</label>
-    <textarea id="questions" name="questions" rows="3"></textarea>
-    <div class="navigation">
-      <button onclick="showPage('page-6')">Back</button>
-      <button onclick="showPage('page-8')">Next</button>
-    </div>
+    <textarea id="questions" rows="3"></textarea>
+    <button onclick="goToPage(6)">Back</button>
+    <button onclick="goToPage(8)">Next</button>
   </div>
 
   <!-- Page 8 -->
-  <div class="page-container" id="page-8">
+  <div class="page" id="page-8">
     <h1>Age Verification</h1>
     <p>If accepted, you must be willing to age verify immediately with an app, adult site, or redacted ID. Confirm you will age verify:</p>
-    <div class="navigation">
-      <button onclick="showPage('page-7')">Back</button>
-      <button onclick="submitForm()">Submit Application</button>
-    </div>
+    <button onclick="goToPage(7)">Back</button>
+    <button onclick="goToPage(9)">Submit Application</button>
   </div>
 
   <!-- Submission Confirmation Page -->
-  <div class="page-container" id="submission-page">
+  <div class="page" id="page-9">
     <h1>Well Done for Taking the First Step</h1>
     <p>Welcome to the World of Miss Peach! If you are one of the lucky ones chosen, she will be in touch when it is convenient for her.</p>
   </div>
 
   <script>
-    function showPage(pageId) {
-      const pages = document.querySelectorAll('.page-container');
-      pages.forEach(page => page.classList.remove('active')); // Hide all pages
-      document.getElementById(pageId).classList.add('active'); // Show the requested page
+    function goToPage(pageNumber) {
+      // Hide all pages
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
+
+      // Show the requested page
+      document.getElementById(`page-${pageNumber}`).classList.add('active');
     }
 
     function redirectAway() {
-      window.location.href = "https://www.google.com"; // Replace with a safe URL
+      window.location.href = "https://www.google.com";
     }
+  </script>
+</body>
+</html>
