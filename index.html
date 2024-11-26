@@ -28,11 +28,11 @@
       width: 100%;
       height: 100%;
       background-image: url('your-image.png'); /* Replace with your image file */
-      background-size: contain; /* Adjust image size */
+      background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-      opacity: 0.1; /* Makes the image fade into the background */
-      z-index: -1; /* Ensures the image stays behind content */
+      opacity: 0.1;
+      z-index: -1;
     }
 
     .form-container, .welcome-container {
@@ -45,7 +45,7 @@
       text-align: center;
       display: none; /* Initially hidden */
       transition: transform 0.3s ease, opacity 0.3s ease;
-      z-index: 1; /* Ensures content appears above background */
+      z-index: 1;
     }
 
     .welcome-container.active, .form-container.active {
@@ -100,7 +100,7 @@
 <body>
   <!-- Welcome Page -->
   <div class="welcome-container active" id="welcome">
-    <h1>Adult Content Warning</h1>
+    <h1>Welcome to the World of Miss Peach</h1>
     <p>This page contains adult content. You must be 18 years or older to access this site.</p>
     <button onclick="startForm()">I am 18 or older</button>
     <button onclick="redirectAway()">I am under 18</button>
@@ -109,17 +109,17 @@
   <!-- Form Pages -->
   <div class="form-container" id="page-1">
     <h1>Welcome to my world</h1>
-    <label for="name">What's your preferred name or pet names?</label>
-    <textarea id="name" name="name" rows="2" placeholder="Add any names you may dislike being called"></textarea>
+    <label for="name">What's your preferred name?</label>
+    <textarea id="name" name="name" rows="2" placeholder="List all names or pet names you like"></textarea>
     <div class="navigation">
       <button onclick="nextPage(2)">Next</button>
     </div>
   </div>
 
   <div class="form-container" id="page-2">
-    <h1>Your Socials</h1>
-    <label for="socials">Your Reddit, X, or Discord username(s):</label>
-    <textarea id="socials" name="socials" rows="2" placeholder="Include Telegram if applicable"></textarea>
+    <h1>Dislikes and Limits</h1>
+    <label for="dislikes">Tell me names you dislike and also any limits you have in general:</label>
+    <textarea id="dislikes" name="dislikes" rows="3" placeholder="Feel free to be detailed"></textarea>
     <div class="navigation">
       <button onclick="prevPage(1)">Back</button>
       <button onclick="nextPage(3)">Next</button>
@@ -127,6 +127,16 @@
   </div>
 
   <div class="form-container" id="page-3">
+    <h1>Your Socials</h1>
+    <label for="socials">Your Reddit, X, or Discord username(s):</label>
+    <textarea id="socials" name="socials" rows="2" placeholder="Include Telegram if applicable"></textarea>
+    <div class="navigation">
+      <button onclick="prevPage(2)">Back</button>
+      <button onclick="nextPage(4)">Next</button>
+    </div>
+  </div>
+
+  <div class="form-container" id="page-4">
     <h1>Payment Methods</h1>
     <label for="payment">Which of My payment methods will you use?</label>
     <select id="payment" name="payment">
@@ -138,24 +148,14 @@
       <option value="crypto">Crypto</option>
     </select>
     <div class="navigation">
-      <button onclick="prevPage(2)">Back</button>
-      <button onclick="nextPage(4)">Next</button>
-    </div>
-  </div>
-
-  <div class="form-container" id="page-4">
-    <h1>Your Kinks</h1>
-    <label for="kinks">Tell me your main kinks:</label>
-    <textarea id="kinks" name="kinks" rows="3" placeholder="Feel free to be detailed"></textarea>
-    <div class="navigation">
       <button onclick="prevPage(3)">Back</button>
       <button onclick="nextPage(5)">Next</button>
     </div>
   </div>
 
   <div class="form-container" id="page-5">
-    <h1>Weekly Budget</h1>
-    <label for="budget">How would you rate your weekly budget?</label>
+    <h1>Minimum Weekly Budget</h1>
+    <label for="budget">What is your minimum weekly budget?</label>
     <select id="budget" name="budget">
       <option value="25-50">$25-50</option>
       <option value="50-75">$50-75</option>
@@ -170,9 +170,9 @@
   </div>
 
   <div class="form-container" id="page-6">
-    <h1>Limits</h1>
-    <label for="limits">What are your limits?</label>
-    <textarea id="limits" name="limits" rows="3"></textarea>
+    <h1>Questions Before Payment</h1>
+    <label>You may ask up to 3 SFW questions before payment:</label>
+    <textarea id="questions" name="questions" rows="3"></textarea>
     <div class="navigation">
       <button onclick="prevPage(5)">Back</button>
       <button onclick="nextPage(7)">Next</button>
@@ -180,19 +180,9 @@
   </div>
 
   <div class="form-container" id="page-7">
-    <h1>Questions Before Payment</h1>
-    <label>You may ask up to 3 SFW questions before payment:</label>
-    <textarea id="questions" name="questions" rows="3"></textarea>
-    <div class="navigation">
-      <button onclick="prevPage(6)">Back</button>
-      <button onclick="nextPage(8)">Next</button>
-    </div>
-  </div>
-
-  <div class="form-container" id="page-8">
     <h1>Age Verification</h1>
     <p>You must be willing to age verify immediately with an app, adult site, or redacted ID. Confirm you will age verify:</p>
-    <button onclick="prevPage(7)">Back</button>
+    <button onclick="prevPage(6)">Back</button>
     <button onclick="submitForm()">Submit Application</button>
   </div>
 
@@ -225,4 +215,4 @@
     }
   </script>
 </body>
-</
+</html>
