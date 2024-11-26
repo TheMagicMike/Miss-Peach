@@ -36,7 +36,7 @@
     }
 
     /* Container Styles */
-    .form-container, .welcome-container, .submission-container {
+    .page-container {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -48,24 +48,20 @@
       width: 90%;
       max-width: 600px;
       text-align: center;
-      display: none; /* Initially hidden */
-      opacity: 0; /* For smooth transitions */
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      display: none; /* All pages hidden by default */
     }
 
-    .form-container.active, .welcome-container.active, .submission-container.active {
-      display: block;
-      opacity: 1; /* Fully visible */
-      visibility: visible;
+    .page-container.active {
+      display: block; /* Show the active page */
     }
 
-    h1, label, p {
+    h1, p, label {
       margin-bottom: 20px;
       text-align: center;
     }
 
     textarea, select, button {
-      width: 80%; /* Central alignment */
+      width: 80%;
       padding: 15px;
       margin: 10px 0;
       border: none;
@@ -76,11 +72,6 @@
       box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
       outline: none;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    textarea:hover, select:hover {
-      transform: scale(1.02); /* Slight enlargement on hover */
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     }
 
     button {
@@ -108,44 +99,44 @@
 </head>
 <body>
   <!-- Welcome Page -->
-  <div class="welcome-container active" id="welcome">
+  <div class="page-container active" id="welcome-page">
     <h1>Welcome to the World of Miss Peach</h1>
     <p>This page contains adult content. You must be 18 years or older to access this site.</p>
-    <button onclick="startForm()">I am 18 or older</button>
+    <button onclick="showPage('page-1')">I am 18 or older</button>
     <button onclick="redirectAway()">I am under 18</button>
   </div>
 
   <!-- Form Pages -->
-  <div class="form-container" id="page-1">
+  <div class="page-container" id="page-1">
     <h1>Welcome to my world</h1>
     <label for="name">What's your preferred name?</label>
     <textarea id="name" name="name" rows="2" placeholder="List all names or pet names you like"></textarea>
     <div class="navigation">
-      <button onclick="nextPage(2)">Next</button>
+      <button onclick="showPage('page-2')">Next</button>
     </div>
   </div>
 
-  <div class="form-container" id="page-2">
+  <div class="page-container" id="page-2">
     <h1>Dislikes and Limits</h1>
     <label for="dislikes">Tell me names you dislike and also any limits you have in general:</label>
     <textarea id="dislikes" name="dislikes" rows="3" placeholder="Feel free to be detailed"></textarea>
     <div class="navigation">
-      <button onclick="prevPage(1)">Back</button>
-      <button onclick="nextPage(3)">Next</button>
+      <button onclick="showPage('page-1')">Back</button>
+      <button onclick="showPage('page-3')">Next</button>
     </div>
   </div>
 
-  <div class="form-container" id="page-3">
+  <div class="page-container" id="page-3">
     <h1>Your Socials</h1>
     <label for="socials">Your Reddit, X, or Discord username(s):</label>
     <textarea id="socials" name="socials" rows="2" placeholder="Include Telegram if applicable"></textarea>
     <div class="navigation">
-      <button onclick="prevPage(2)">Back</button>
-      <button onclick="nextPage(4)">Next</button>
+      <button onclick="showPage('page-2')">Back</button>
+      <button onclick="showPage('page-4')">Next</button>
     </div>
   </div>
 
-  <div class="form-container" id="page-4">
+  <div class="page-container" id="page-4">
     <h1>Payment Methods</h1>
     <label for="payment">Which of My payment methods will you use?</label>
     <select id="payment" name="payment">
@@ -157,68 +148,28 @@
       <option value="crypto">Crypto</option>
     </select>
     <div class="navigation">
-      <button onclick="prevPage(3)">Back</button>
-      <button onclick="nextPage(5)">Next</button>
+      <button onclick="showPage('page-3')">Back</button>
+      <button onclick="showPage('page-5')">Next</button>
     </div>
   </div>
 
-  <div class="form-container" id="page-5">
-    <h1>Minimum Weekly Budget</h1>
-    <label for="budget">What is your minimum weekly budget?</label>
-    <select id="budget" name="budget">
-      <option value="25-50">$25-50</option>
-      <option value="50-75">$50-75</option>
-      <option value="75-250">$75-250</option>
-      <option value="250-500">$250-500</option>
-      <option value="500+">$500+</option>
-    </select>
-    <div class="navigation">
-      <button onclick="prevPage(4)">Back</button>
-      <button onclick="nextPage(6)">Next</button>
-    </div>
-  </div>
-
-  <div class="form-container" id="page-6">
-    <h1>Questions Before Payment</h1>
-    <label>You may ask up to 3 SFW questions before payment:</label>
-    <textarea id="questions" name="questions" rows="3"></textarea>
-    <div class="navigation">
-      <button onclick="prevPage(5)">Back</button>
-      <button onclick="nextPage(7)">Next</button>
-    </div>
-  </div>
-
-  <div class="form-container" id="page-7">
-    <h1>Age Verification</h1>
-    <p>If accepted, you must be willing to age verify immediately with an app, adult site, or redacted ID. Confirm you will age verify:</p>
-    <div class="navigation">
-      <button onclick="prevPage(6)">Back</button>
-      <button onclick="submitForm()">Submit Application</button>
-    </div>
-  </div>
-
-  <!-- Submission Confirmation Page -->
-  <div class="submission-container" id="submission">
+  <div class="page-container" id="page-5">
     <h1>Well Done for Taking the First Step</h1>
     <p>Welcome to the World of Miss Peach! If you are one of the lucky ones chosen, she will be in touch when it is convenient for her.</p>
   </div>
 
   <script>
-    let currentPage = 1;
-
-    function startForm() {
-      document.getElementById('welcome').classList.remove('active');
-      document.getElementById('welcome').style.display = "none";
-      document.getElementById('page-1').classList.add('active');
+    // Function to show the requested page
+    function showPage(pageId) {
+      const allPages = document.querySelectorAll('.page-container');
+      allPages.forEach(page => page.classList.remove('active')); // Hide all pages
+      document.getElementById(pageId).classList.add('active'); // Show the requested page
     }
 
-    function nextPage(page) {
-      document.getElementById(`page-${currentPage}`).classList.remove('active');
-      currentPage = page;
-      document.getElementById(`page-${currentPage}`).classList.add('active');
+    // Redirect function for underage users
+    function redirectAway() {
+      window.location.href = "https://www.google.com"; // Replace with a safe URL
     }
-
-    function prevPage(page) {
-      document.getElementById(`page-${currentPage}`).classList.remove('active');
-      currentPage = page;
-      document.getElementById(`page-${current
+  </script>
+</body>
+</html>
