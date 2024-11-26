@@ -36,7 +36,7 @@
     }
 
     /* Container Styles */
-    .form-container, .welcome-container {
+    .form-container, .welcome-container, .submission-container {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -53,7 +53,7 @@
       transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
-    .form-container.active, .welcome-container.active {
+    .form-container.active, .welcome-container.active, .submission-container.active {
       display: block;
       opacity: 1; /* Fully visible */
       visibility: visible;
@@ -197,6 +197,12 @@
     </div>
   </div>
 
+  <!-- Submission Confirmation Page -->
+  <div class="submission-container" id="submission">
+    <h1>Well Done for Taking the First Step</h1>
+    <p>Welcome to the World of Miss Peach! If you are one of the lucky ones chosen, she will be in touch when it is convenient for her.</p>
+  </div>
+
   <script>
     let currentPage = 1;
 
@@ -213,17 +219,4 @@
     }
 
     function prevPage(page) {
-      document.getElementById(`page-${currentPage}`).classList.remove('active');
-      currentPage = page;
-      document.getElementById(`page-${currentPage}`).classList.add('active');
-    }
-
-    function redirectAway() {
-      window.location.href = "https://www.google.com"; // Replace with a safe URL
-    }
-
-    function submitForm() {
-      alert("Thank you for applying! Your application has been submitted.");
-    }
-  </script>
-</body>
+      document.getElementById(`page-${currentPage
