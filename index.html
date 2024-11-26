@@ -31,7 +31,7 @@
       background-size: cover; /* Fill the screen */
       background-repeat: no-repeat;
       background-position: center;
-      opacity: 0.25; /* Increased visibility */
+      opacity: 0.375; /* Increased visibility */
       z-index: -1; /* Ensures the image stays behind content */
     }
 
@@ -46,19 +46,24 @@
       display: none; /* Initially hidden */
       transition: transform 0.3s ease, opacity 0.3s ease;
       z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; /* Central alignment */
     }
 
     .welcome-container.active, .form-container.active {
-      display: block; /* Show active page */
+      display: flex; /* Show active page */
       opacity: 1;
     }
 
     h1, label, p {
       margin-bottom: 20px;
+      text-align: center; /* Text alignment centrally */
     }
 
-    input, select, textarea, button {
-      width: 100%;
+    textarea, select, button {
+      width: 80%; /* Symmetrical alignment */
       padding: 15px;
       margin: 10px 0;
       border: none;
@@ -71,7 +76,7 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    input:hover, select:hover, textarea:hover {
+    textarea:hover, select:hover {
       transform: scale(1.02); /* Slight enlargement on hover */
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     }
@@ -89,6 +94,8 @@
 
     .navigation {
       margin-top: 20px;
+      display: flex;
+      justify-content: center;
     }
 
     .navigation button {
@@ -129,8 +136,7 @@
   <div class="form-container" id="page-3">
     <h1>Your Socials</h1>
     <label for="socials">Your Reddit, X, or Discord username(s):</label>
-    <textarea id="socials" name="socials" rows="2"
-      placeholder="Include Telegram if applicable"></textarea>
+    <textarea id="socials" name="socials" rows="2" placeholder="Include Telegram if applicable"></textarea>
     <div class="navigation">
       <button onclick="prevPage(2)">Back</button>
       <button onclick="nextPage(4)">Next</button>
