@@ -19,7 +19,7 @@
       overflow: hidden;
     }
 
-    /* Background Image as Watermark */
+    /* Background Image */
     body::before {
       content: "";
       position: absolute;
@@ -28,11 +28,11 @@
       width: 100%;
       height: 100%;
       background-image: url('your-image.png'); /* Replace with your image file */
-      background-size: contain;
+      background-size: cover; /* Fill the screen */
       background-repeat: no-repeat;
       background-position: center;
-      opacity: 0.1;
-      z-index: -1;
+      opacity: 0.25; /* Increased visibility */
+      z-index: -1; /* Ensures the image stays behind content */
     }
 
     .form-container, .welcome-container {
@@ -129,7 +129,8 @@
   <div class="form-container" id="page-3">
     <h1>Your Socials</h1>
     <label for="socials">Your Reddit, X, or Discord username(s):</label>
-    <textarea id="socials" name="socials" rows="2" placeholder="Include Telegram if applicable"></textarea>
+    <textarea id="socials" name="socials" rows="2"
+      placeholder="Include Telegram if applicable"></textarea>
     <div class="navigation">
       <button onclick="prevPage(2)">Back</button>
       <button onclick="nextPage(4)">Next</button>
@@ -181,9 +182,11 @@
 
   <div class="form-container" id="page-7">
     <h1>Age Verification</h1>
-    <p>You must be willing to age verify immediately with an app, adult site, or redacted ID. Confirm you will age verify:</p>
-    <button onclick="prevPage(6)">Back</button>
-    <button onclick="submitForm()">Submit Application</button>
+    <p>If accepted, you must be willing to age verify immediately with an app, adult site, or redacted ID. Confirm you will age verify:</p>
+    <div class="navigation">
+      <button onclick="prevPage(6)">Back</button>
+      <button onclick="submitForm()">Submit Application</button>
+    </div>
   </div>
 
   <script>
