@@ -118,25 +118,6 @@
       margin: 0 auto 10px;
       width: 80%;
     }
-
-    /* Light whip effect */
-    .whip {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 80%);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%) scale(0);
-      animation: whipEffect 0.5s ease-out;
-    }
-
-    @keyframes whipEffect {
-      from { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-      to { transform: translate(-50%, -50%) scale(3); opacity: 0; }
-    }
   </style>
 </head>
 <body>
@@ -189,17 +170,49 @@
       <button type="button" onclick="showNextForm(5)">Next</button>
     </div>
 
-    <!-- Age Verification Reminder -->
+    <!-- Page 5 -->
     <div class="form-container" id="form-page-5">
+      <h1>Your Kinks</h1>
+      <label for="kinks">Tell me your main kinks:</label>
+      <textarea id="kinks" name="kinks" rows="3" placeholder="Feel free to be detailed" required></textarea>
+      <button type="button" onclick="showNextForm(4)">Back</button>
+      <button type="button" onclick="showNextForm(6)">Next</button>
+    </div>
+
+    <!-- Page 6 -->
+    <div class="form-container" id="form-page-6">
+      <h1>Weekly Budget</h1>
+      <label for="budget">What is your minimum weekly budget?</label>
+      <select id="budget" name="budget" required>
+        <option value="25-50">$25-50</option>
+        <option value="50-75">$50-75</option>
+        <option value="75-250">$75-250</option>
+        <option value="500+">$500+</option>
+      </select>
+      <button type="button" onclick="showNextForm(5)">Back</button>
+      <button type="button" onclick="showNextForm(7)">Next</button>
+    </div>
+
+    <!-- Page 7 -->
+    <div class="form-container" id="form-page-7">
+      <h1>Questions Before Payment</h1>
+      <label>Do you have any SFW questions?</label>
+      <textarea id="questions" name="questions" rows="3" placeholder="Optional"></textarea>
+      <button type="button" onclick="showNextForm(6)">Back</button>
+      <button type="button" onclick="showNextForm(8)">Next</button>
+    </div>
+
+    <!-- Age Verification Reminder -->
+    <div class="form-container" id="form-page-8">
       <h1>Age Verification Required</h1>
       <p>If accepted, you must be willing to age verify immediately using an app, adult site, or redacted ID.</p>
-      <button type="button" onclick="showNextForm(4)">Back</button>
+      <button type="button" onclick="showNextForm(7)">Back</button>
       <button type="submit">Submit</button>
     </div>
   </form>
 
   <!-- Submission Confirmation -->
-  <div class="form-container" id="form-page-6">
+  <div class="form-container" id="form-page-9">
     <h1>Application Submitted</h1>
     <p>If successful, Miss Peach will be in touch when it is convenient for her.</p>
   </div>
@@ -207,24 +220,13 @@
   <script>
     // Show the next form page
     function showNextForm(nextPage) {
-      // Hide all form containers
       const forms = document.querySelectorAll(".form-container");
       forms.forEach((form) => form.classList.remove("active"));
-
-      // Show the target form page
       document.getElementById(`form-page-${nextPage}`).classList.add("active");
-
-      // Trigger whip effect
-      const whip = document.getElementById("whipEffect");
-      if (whip) {
-        whip.style.animation = "none"; // Reset animation
-        setTimeout(() => whip.style.animation = "", 10); // Restart animation
-      }
     }
 
-    // Redirect away if under 18
     function redirectAway() {
-      window.location.href = "https://www.google.com"; // Replace with a safe URL
+      window.location.href = "https://www.google.com"; // Replace with desired redirect URL
     }
   </script>
 </body>
