@@ -52,7 +52,7 @@
       display: block;
     }
 
-    textarea, select, button {
+    textarea, select, button, input[type="text"] {
       width: 80%;
       padding: 15px;
       margin: 10px 0;
@@ -89,7 +89,7 @@
   <div class="page" id="page-1">
     <h1>Welcome to my world</h1>
     <label for="name">What's your preferred name?</label>
-    <textarea id="name" rows="2" placeholder="List all names or pet names you like"></textarea>
+    <input type="text" id="name" name="name" placeholder="List all names or pet names you like" required>
     <button onclick="goToPage(2)">Next</button>
   </div>
 
@@ -97,7 +97,7 @@
   <div class="page" id="page-2">
     <h1>Dislikes and Limits</h1>
     <label for="dislikes">Tell me names you dislike and also any limits you have in general:</label>
-    <textarea id="dislikes" rows="3" placeholder="Feel free to be detailed"></textarea>
+    <textarea id="dislikes" name="dislikes" rows="3" placeholder="Feel free to be detailed"></textarea>
     <button onclick="goToPage(1)">Back</button>
     <button onclick="goToPage(3)">Next</button>
   </div>
@@ -106,7 +106,7 @@
   <div class="page" id="page-3">
     <h1>Your Socials</h1>
     <label for="socials">Your Reddit, X, or Discord username(s):</label>
-    <textarea id="socials" rows="2" placeholder="Include Telegram if applicable"></textarea>
+    <textarea id="socials" name="socials" rows="2" placeholder="Include Telegram if applicable"></textarea>
     <button onclick="goToPage(2)">Back</button>
     <button onclick="goToPage(4)">Next</button>
   </div>
@@ -115,7 +115,7 @@
   <div class="page" id="page-4">
     <h1>Payment Methods</h1>
     <label for="payment">Which of My payment methods will you use?</label>
-    <select id="payment">
+    <select id="payment" name="payment">
       <option value="tributify">Tributify</option>
       <option value="throne">Throne</option>
       <option value="revolut">Revolut</option>
@@ -131,7 +131,7 @@
   <div class="page" id="page-5">
     <h1>Your Kinks</h1>
     <label for="kinks">Tell me your main kinks:</label>
-    <textarea id="kinks" rows="3" placeholder="Feel free to be detailed"></textarea>
+    <textarea id="kinks" name="kinks" rows="3" placeholder="Feel free to be detailed"></textarea>
     <button onclick="goToPage(4)">Back</button>
     <button onclick="goToPage(6)">Next</button>
   </div>
@@ -140,7 +140,7 @@
   <div class="page" id="page-6">
     <h1>Minimum Weekly Budget</h1>
     <label for="budget">What is your minimum weekly budget?</label>
-    <select id="budget">
+    <select id="budget" name="budget">
       <option value="25-50">$25-50</option>
       <option value="50-75">$50-75</option>
       <option value="75-250">$75-250</option>
@@ -155,7 +155,7 @@
   <div class="page" id="page-7">
     <h1>Questions Before Payment</h1>
     <label>You may ask up to 3 SFW questions before payment:</label>
-    <textarea id="questions" rows="3"></textarea>
+    <textarea id="questions" name="questions" rows="3"></textarea>
     <button onclick="goToPage(6)">Back</button>
     <button onclick="goToPage(8)">Next</button>
   </div>
@@ -165,7 +165,7 @@
     <h1>Age Verification</h1>
     <p>If accepted, you must be willing to age verify immediately with an app, adult site, or redacted ID. Confirm you will age verify:</p>
     <button onclick="goToPage(7)">Back</button>
-    <button onclick="goToPage(9)">Submit Application</button>
+    <button onclick="submitForm()">Submit Application</button>
   </div>
 
   <!-- Submission Confirmation Page -->
@@ -176,12 +176,39 @@
 
   <script>
     function goToPage(pageNumber) {
-      // Hide all pages
       const pages = document.querySelectorAll('.page');
       pages.forEach(page => page.classList.remove('active'));
-
-      // Show the requested page
       document.getElementById(`page-${pageNumber}`).classList.add('active');
+    }
+
+    async function submitForm() {
+      const formData = {
+        name: document.getElementById("name").value,
+        dislikes: document.getElementById("dislikes").value,
+        socials: document.getElementById("socials").value,
+        payment: document.getElementById("payment").value,
+        kinks: document.getElementById("kinks").value,
+        budget: document.getElementById("budget").value,
+        questions: document.getElementById("questions").value,
+        ageVerification: "Yes", // Assuming they reached this page
+      };
+
+      const scriptURL = "YOUR_GOOGLE_SCRIPT_URL_HERE"; // Replace with your deployed Apps Script URL
+
+      try {
+        const response = await fetch(scriptURL, {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: { "Content-Type": "application/json" },
+        });
+        if (response.ok) {
+          goToPage(9); // Show the confirmation page
+        } else {
+          alert("Submission failed. Please try again.");
+        }
+      } catch (error) {
+        alert("Error: " + error.message);
+      }
     }
 
     function redirectAway() {
