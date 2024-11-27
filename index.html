@@ -5,18 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Miss Peach Application</title>
   <style>
+    /* General Styles */
     body {
-      font-family: Arial, sans-serif;
-      background-color: #000000;
-      color: #ffffff;
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
+      height: 100vh;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      overflow: hidden;
+      background: linear-gradient(120deg, #ff416c, #ff4b2b);
+      animation: gradientMove 6s infinite alternate;
     }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
     body::before {
       content: "";
       position: absolute;
@@ -28,22 +35,35 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-      opacity: 0.4;
+      filter: blur(3px) brightness(0.8);
       z-index: -1;
     }
+
     .form-container {
       background: rgba(0, 0, 0, 0.8);
       padding: 30px;
       border-radius: 20px;
       text-align: center;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
       width: 90%;
       max-width: 600px;
-      display: none; /* Hidden by default */
+      display: none;
+      transform: scale(0.95);
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
     }
+
     .form-container.active {
-      display: block; /* Show the active form */
+      display: block;
     }
+
+    @keyframes fadeIn {
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
     textarea, select, button, input[type="text"] {
       width: 80%;
       padding: 15px;
@@ -53,24 +73,58 @@
       background-color: rgba(255, 255, 255, 0.2);
       color: #fff;
       font-size: 1em;
+      outline: none;
     }
+
+    textarea {
+      resize: none;
+    }
+
     button {
-      background-color: #007bff;
+      background: linear-gradient(120deg, #ff416c, #ff4b2b);
       color: white;
       cursor: pointer;
       font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      font-size: 1em;
+      transition: background 0.3s, transform 0.2s;
     }
+
     button:hover {
-      background-color: #0056b3;
+      background: linear-gradient(120deg, #ff4b2b, #ff416c);
+      transform: scale(1.05);
     }
+
     h1, label {
       margin-bottom: 20px;
     }
+
     label {
       display: block;
       text-align: left;
       margin: 0 auto 10px;
       width: 80%;
+    }
+
+    /* Light whip effect */
+    .whip {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 80%);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0);
+      animation: whipEffect 0.5s ease-out;
+    }
+
+    @keyframes whipEffect {
+      from { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+      to { transform: translate(-50%, -50%) scale(3); opacity: 0; }
     }
   </style>
 </head>
@@ -100,54 +154,12 @@
       <label for="socials">Your Socials (Reddit, X, Discord):</label>
       <textarea id="socials" name="socials" rows="2" placeholder="e.g., @username on Discord" required></textarea>
       <button type="button" onclick="showNextForm(2)">Back</button>
-      <button type="button" onclick="showNextForm(4)">Next</button>
-    </div>
-
-    <!-- Page 4 -->
-    <div class="form-container" id="form-page-4">
-      <h1>Payment Methods</h1>
-      <label for="payment">Which of my payment methods will you use?</label>
-      <select id="payment" name="payment" required>
-        <option value="tributify">Tributify</option>
-        <option value="throne">Throne</option>
-        <option value="crypto">Crypto</option>
-      </select>
-      <button type="button" onclick="showNextForm(3)">Back</button>
-      <button type="button" onclick="showNextForm(5)">Next</button>
-    </div>
-
-    <!-- Page 5 -->
-    <div class="form-container" id="form-page-5">
-      <h1>Your Kinks</h1>
-      <label for="kinks">Tell me your main kinks:</label>
-      <textarea id="kinks" name="kinks" rows="3" placeholder="Feel free to be detailed" required></textarea>
-      <button type="button" onclick="showNextForm(4)">Back</button>
-      <button type="button" onclick="showNextForm(6)">Next</button>
-    </div>
-
-    <!-- Page 6 -->
-    <div class="form-container" id="form-page-6">
-      <h1>Weekly Budget</h1>
-      <label for="budget">What is your minimum weekly budget?</label>
-      <select id="budget" name="budget" required>
-        <option value="25-50">$25-50</option>
-        <option value="50-75">$50-75</option>
-        <option value="75-250">$75-250</option>
-        <option value="500+">$500+</option>
-      </select>
-      <button type="button" onclick="showNextForm(5)">Back</button>
-      <button type="button" onclick="showNextForm(7)">Next</button>
-    </div>
-
-    <!-- Page 7 -->
-    <div class="form-container" id="form-page-7">
-      <h1>Questions Before Payment</h1>
-      <label>Do you have any SFW questions?</label>
-      <textarea id="questions" name="questions" rows="3" placeholder="Optional"></textarea>
-      <button type="button" onclick="showNextForm(6)">Back</button>
       <button type="submit">Submit</button>
     </div>
   </form>
+
+  <!-- Whip Effect -->
+  <div class="whip" id="whipEffect"></div>
 
   <script>
     // Show the next form page
@@ -158,6 +170,11 @@
 
       // Show the target form page
       document.getElementById(`form-page-${nextPage}`).classList.add("active");
+
+      // Trigger whip effect
+      const whip = document.getElementById("whipEffect");
+      whip.style.animation = "none"; // Reset animation
+      setTimeout(() => whip.style.animation = "", 10); // Restart animation
     }
   </script>
 </body>
