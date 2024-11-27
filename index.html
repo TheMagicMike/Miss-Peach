@@ -35,8 +35,13 @@
       z-index: -1;
     }
 
-    /* Form Container */
-    .form-container {
+    /* Page Container */
+    .page {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       background: rgba(0, 0, 0, 0.8);
       padding: 30px;
       border-radius: 20px;
@@ -46,7 +51,11 @@
       max-width: 600px;
     }
 
-    input, textarea, select, button {
+    .page.active {
+      display: block;
+    }
+
+    textarea, select, button, input[type="text"] {
       width: 80%;
       padding: 15px;
       margin: 10px 0;
@@ -85,73 +94,126 @@
   </style>
 </head>
 <body>
-  <div class="form-container">
+  <!-- Page 1 -->
+  <div class="page active" id="page-1">
     <h1>Miss Peach Application</h1>
-    <form id="myForm">
-      <label for="name">What's your preferred name?</label>
-      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+    <label for="name">What's your preferred name?</label>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+    <button onclick="nextPage(2)">Next</button>
+  </div>
 
-      <label for="dislikes">Tell me names you dislike or limits you have:</label>
-      <textarea id="dislikes" name="dislikes" rows="3" placeholder="Dislikes or limits" required></textarea>
+  <!-- Page 2 -->
+  <div class="page" id="page-2">
+    <h1>Dislikes and Limits</h1>
+    <label for="dislikes">Tell me names you dislike or limits you have:</label>
+    <textarea id="dislikes" name="dislikes" rows="3" placeholder="Dislikes or limits" required></textarea>
+    <button onclick="prevPage(1)">Back</button>
+    <button onclick="nextPage(3)">Next</button>
+  </div>
 
-      <label for="socials">Your Socials (Reddit, X, Discord):</label>
-      <textarea id="socials" name="socials" rows="2" placeholder="e.g., @username on Discord" required></textarea>
+  <!-- Page 3 -->
+  <div class="page" id="page-3">
+    <h1>Your Socials</h1>
+    <label for="socials">Your Socials (Reddit, X, Discord):</label>
+    <textarea id="socials" name="socials" rows="2" placeholder="e.g., @username on Discord" required></textarea>
+    <button onclick="prevPage(2)">Back</button>
+    <button onclick="nextPage(4)">Next</button>
+  </div>
 
-      <label for="payment">Which of my payment methods will you use?</label>
-      <select id="payment" name="payment" required>
-        <option value="tributify">Tributify</option>
-        <option value="throne">Throne</option>
-        <option value="crypto">Crypto</option>
-      </select>
+  <!-- Page 4 -->
+  <div class="page" id="page-4">
+    <h1>Payment Methods</h1>
+    <label for="payment">Which of my payment methods will you use?</label>
+    <select id="payment" name="payment" required>
+      <option value="tributify">Tributify</option>
+      <option value="throne">Throne</option>
+      <option value="crypto">Crypto</option>
+    </select>
+    <button onclick="prevPage(3)">Back</button>
+    <button onclick="nextPage(5)">Next</button>
+  </div>
 
-      <label for="kinks">Tell me your main kinks:</label>
-      <textarea id="kinks" name="kinks" rows="3" placeholder="Feel free to be detailed" required></textarea>
+  <!-- Page 5 -->
+  <div class="page" id="page-5">
+    <h1>Your Kinks</h1>
+    <label for="kinks">Tell me your main kinks:</label>
+    <textarea id="kinks" name="kinks" rows="3" placeholder="Feel free to be detailed" required></textarea>
+    <button onclick="prevPage(4)">Back</button>
+    <button onclick="nextPage(6)">Next</button>
+  </div>
 
-      <label for="budget">What is your minimum weekly budget?</label>
-      <select id="budget" name="budget" required>
-        <option value="25-50">$25-50</option>
-        <option value="50-75">$50-75</option>
-        <option value="75-250">$75-250</option>
-        <option value="500+">$500+</option>
-      </select>
+  <!-- Page 6 -->
+  <div class="page" id="page-6">
+    <h1>Weekly Budget</h1>
+    <label for="budget">What is your minimum weekly budget?</label>
+    <select id="budget" name="budget" required>
+      <option value="25-50">$25-50</option>
+      <option value="50-75">$50-75</option>
+      <option value="75-250">$75-250</option>
+      <option value="500+">$500+</option>
+    </select>
+    <button onclick="prevPage(5)">Back</button>
+    <button onclick="nextPage(7)">Next</button>
+  </div>
 
-      <label for="questions">Do you have any SFW questions?</label>
-      <textarea id="questions" name="questions" rows="3" placeholder="Optional"></textarea>
-
-      <button type="submit">Submit Application</button>
-    </form>
+  <!-- Page 7 -->
+  <div class="page" id="page-7">
+    <h1>Questions Before Payment</h1>
+    <label>Do you have any SFW questions?</label>
+    <textarea id="questions" name="questions" rows="3" placeholder="Optional"></textarea>
+    <button onclick="prevPage(6)">Back</button>
+    <button onclick="submitForm()">Submit Application</button>
   </div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbzaOT-fE-fP5WuyasX7HfwaQHDegqU-r5C83Y2-2HtNRLum9McXVl1V8KWVXYKceMIP/exec";
+    let currentPage = 1;
 
-    document.getElementById("myForm").addEventListener("submit", async function (e) {
-      e.preventDefault();
+    function nextPage(page) {
+      document.getElementById(`page-${currentPage}`).classList.remove('active');
+      currentPage = page;
+      document.getElementById(`page-${currentPage}`).classList.add('active');
+    }
 
-      const formData = new FormData(this);
-      const data = {};
+    function prevPage(page) {
+      document.getElementById(`page-${currentPage}`).classList.remove('active');
+      currentPage = page;
+      document.getElementById(`page-${currentPage}`).classList.add('active');
+    }
 
-      formData.forEach((value, key) => {
-        data[key] = value;
-      });
+    async function submitForm() {
+      const scriptURL = "https://script.google.com/macros/s/AKfycbzaOT-fE-fP5WuyasX7HfwaQHDegqU-r5C83Y2-2HtNRLum9McXVl1V8KWVXYKceMIP/exec";
+
+      const formData = {
+        name: document.getElementById("name").value,
+        dislikes: document.getElementById("dislikes").value,
+        socials: document.getElementById("socials").value,
+        payment: document.getElementById("payment").value,
+        kinks: document.getElementById("kinks").value,
+        budget: document.getElementById("budget").value,
+        questions: document.getElementById("questions").value,
+      };
 
       try {
         const response = await fetch(scriptURL, {
           method: "POST",
-          body: JSON.stringify(data),
+          body: JSON.stringify(formData),
           headers: { "Content-Type": "application/json" },
         });
 
         if (response.ok) {
           alert("Form submitted successfully!");
+          // Optionally redirect or reset the form
         } else {
-          console.error("Error in submission:", response.statusText);
           alert("Submission failed. Please try again.");
         }
       } catch (error) {
-        console.error("Fetch error:", error.message);
         alert("Error: " + error.message);
       }
+    }
+  </script>
+</body>
+</html>
+
     });
   </script>
 </body>
