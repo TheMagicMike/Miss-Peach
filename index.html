@@ -39,6 +39,10 @@
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
       width: 90%;
       max-width: 600px;
+      display: none; /* Hidden by default */
+    }
+    .form-container.active {
+      display: block; /* Show the active form */
     }
     textarea, select, button, input[type="text"] {
       width: 80%;
@@ -71,58 +75,90 @@
   </style>
 </head>
 <body>
-  <!-- Page 1 -->
-  <div class="form-container">
-    <form name="page-1" method="POST" data-netlify="true" action="/page-2">
+  <!-- Form -->
+  <form id="multiStepForm" name="multi-step-form" method="POST" data-netlify="true">
+    <!-- Page 1 -->
+    <div class="form-container active" id="form-page-1">
       <h1>Miss Peach Application</h1>
       <label for="name">What's your preferred name?</label>
       <input type="text" id="name" name="name" placeholder="Enter your name" required>
-      <button type="submit">Next</button>
-    </form>
-  </div>
+      <button type="button" onclick="showNextForm(2)">Next</button>
+    </div>
 
-  <!-- Page 2 -->
-  <div class="form-container" style="display: none;">
-    <form name="page-2" method="POST" data-netlify="true" action="/page-3">
+    <!-- Page 2 -->
+    <div class="form-container" id="form-page-2">
       <h1>Dislikes and Limits</h1>
       <label for="dislikes">Tell me names you dislike or limits you have:</label>
       <textarea id="dislikes" name="dislikes" rows="3" placeholder="Dislikes or limits" required></textarea>
-      <button type="submit">Next</button>
-    </form>
-  </div>
+      <button type="button" onclick="showNextForm(1)">Back</button>
+      <button type="button" onclick="showNextForm(3)">Next</button>
+    </div>
 
-  <!-- Page 3 -->
-  <div class="form-container" style="display: none;">
-    <form name="page-3" method="POST" data-netlify="true" action="/thank-you">
+    <!-- Page 3 -->
+    <div class="form-container" id="form-page-3">
       <h1>Your Socials</h1>
       <label for="socials">Your Socials (Reddit, X, Discord):</label>
       <textarea id="socials" name="socials" rows="2" placeholder="e.g., @username on Discord" required></textarea>
+      <button type="button" onclick="showNextForm(2)">Back</button>
+      <button type="button" onclick="showNextForm(4)">Next</button>
+    </div>
+
+    <!-- Page 4 -->
+    <div class="form-container" id="form-page-4">
+      <h1>Payment Methods</h1>
+      <label for="payment">Which of my payment methods will you use?</label>
+      <select id="payment" name="payment" required>
+        <option value="tributify">Tributify</option>
+        <option value="throne">Throne</option>
+        <option value="crypto">Crypto</option>
+      </select>
+      <button type="button" onclick="showNextForm(3)">Back</button>
+      <button type="button" onclick="showNextForm(5)">Next</button>
+    </div>
+
+    <!-- Page 5 -->
+    <div class="form-container" id="form-page-5">
+      <h1>Your Kinks</h1>
+      <label for="kinks">Tell me your main kinks:</label>
+      <textarea id="kinks" name="kinks" rows="3" placeholder="Feel free to be detailed" required></textarea>
+      <button type="button" onclick="showNextForm(4)">Back</button>
+      <button type="button" onclick="showNextForm(6)">Next</button>
+    </div>
+
+    <!-- Page 6 -->
+    <div class="form-container" id="form-page-6">
+      <h1>Weekly Budget</h1>
+      <label for="budget">What is your minimum weekly budget?</label>
+      <select id="budget" name="budget" required>
+        <option value="25-50">$25-50</option>
+        <option value="50-75">$50-75</option>
+        <option value="75-250">$75-250</option>
+        <option value="500+">$500+</option>
+      </select>
+      <button type="button" onclick="showNextForm(5)">Back</button>
+      <button type="button" onclick="showNextForm(7)">Next</button>
+    </div>
+
+    <!-- Page 7 -->
+    <div class="form-container" id="form-page-7">
+      <h1>Questions Before Payment</h1>
+      <label>Do you have any SFW questions?</label>
+      <textarea id="questions" name="questions" rows="3" placeholder="Optional"></textarea>
+      <button type="button" onclick="showNextForm(6)">Back</button>
       <button type="submit">Submit</button>
-    </form>
-  </div>
+    </div>
+  </form>
 
   <script>
-    // Handle Multi-Page Navigation
-    const forms = document.querySelectorAll("form");
-    forms.forEach((form, index) => {
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
+    // Show the next form page
+    function showNextForm(nextPage) {
+      // Hide all form containers
+      const forms = document.querySelectorAll(".form-container");
+      forms.forEach((form) => form.classList.remove("active"));
 
-        // Submit the form via Netlify
-        const formData = new FormData(form);
-        fetch("/", {
-          method: "POST",
-          body: formData,
-        }).then(() => {
-          if (index + 1 < forms.length) {
-            forms[index].parentElement.style.display = "none";
-            forms[index + 1].parentElement.style.display = "block";
-          } else {
-            window.location.href = "/thank-you"; // Redirect to thank-you page
-          }
-        }).catch((error) => console.error("Form submission failed", error));
-      });
-    });
+      // Show the target form page
+      document.getElementById(`form-page-${nextPage}`).classList.add("active");
+    }
   </script>
 </body>
 </html>
