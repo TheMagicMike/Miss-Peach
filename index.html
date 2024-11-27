@@ -33,26 +33,17 @@
       z-index: -1;
     }
 
-    .page {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%;
-      max-width: 600px;
+    form {
       background: rgba(0, 0, 0, 0.8);
       padding: 30px;
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+      width: 90%;
+      max-width: 600px;
     }
 
-    .page.active {
-      display: block;
-    }
-
-    textarea, select, button, input[type="text"] {
+    input, textarea, select, button {
       width: 80%;
       padding: 15px;
       margin: 10px 0;
@@ -61,7 +52,6 @@
       background-color: rgba(255, 255, 255, 0.2);
       color: #fff;
       font-size: 1em;
-      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     button {
@@ -77,143 +67,73 @@
   </style>
 </head>
 <body>
-  <!-- Welcome Page -->
-  <div class="page active" id="page-0">
-    <h1>Welcome to the World of Miss Peach</h1>
-    <p>This page contains adult content. You must be 18 years or older to access this site.</p>
-    <button onclick="goToPage(1)">I am 18 or older</button>
-    <button onclick="redirectAway()">I am under 18</button>
-  </div>
+  <form id="myForm">
+    <h1>Miss Peach Application</h1>
+    
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
 
-  <!-- Page 1 -->
-  <div class="page" id="page-1">
-    <h1>Welcome to my world</h1>
-    <label for="name">What's your preferred name?</label>
-    <input type="text" id="name" name="name" placeholder="List all names or pet names you like" required>
-    <button onclick="goToPage(2)">Next</button>
-  </div>
+    <label for="dislikes">Dislikes:</label>
+    <textarea id="dislikes" name="dislikes" required></textarea><br><br>
 
-  <!-- Page 2 -->
-  <div class="page" id="page-2">
-    <h1>Dislikes and Limits</h1>
-    <label for="dislikes">Tell me names you dislike and also any limits you have in general:</label>
-    <textarea id="dislikes" name="dislikes" rows="3" placeholder="Feel free to be detailed"></textarea>
-    <button onclick="goToPage(1)">Back</button>
-    <button onclick="goToPage(3)">Next</button>
-  </div>
+    <label for="socials">Socials:</label>
+    <input type="text" id="socials" name="socials" required><br><br>
 
-  <!-- Page 3 -->
-  <div class="page" id="page-3">
-    <h1>Your Socials</h1>
-    <label for="socials">Your Reddit, X, or Discord username(s):</label>
-    <textarea id="socials" name="socials" rows="2" placeholder="Include Telegram if applicable"></textarea>
-    <button onclick="goToPage(2)">Back</button>
-    <button onclick="goToPage(4)">Next</button>
-  </div>
-
-  <!-- Page 4 -->
-  <div class="page" id="page-4">
-    <h1>Payment Methods</h1>
-    <label for="payment">Which of My payment methods will you use?</label>
-    <select id="payment" name="payment">
+    <label for="payment">Payment Method:</label>
+    <select id="payment" name="payment" required>
       <option value="tributify">Tributify</option>
       <option value="throne">Throne</option>
-      <option value="revolut">Revolut</option>
-      <option value="mintpay">MintPay</option>
-      <option value="loyalfans">LoyalFans</option>
       <option value="crypto">Crypto</option>
-    </select>
-    <button onclick="goToPage(3)">Back</button>
-    <button onclick="goToPage(5)">Next</button>
-  </div>
+    </select><br><br>
 
-  <!-- Page 5 -->
-  <div class="page" id="page-5">
-    <h1>Your Kinks</h1>
-    <label for="kinks">Tell me your main kinks:</label>
-    <textarea id="kinks" name="kinks" rows="3" placeholder="Feel free to be detailed"></textarea>
-    <button onclick="goToPage(4)">Back</button>
-    <button onclick="goToPage(6)">Next</button>
-  </div>
+    <label for="kinks">Kinks:</label>
+    <textarea id="kinks" name="kinks" required></textarea><br><br>
 
-  <!-- Page 6 -->
-  <div class="page" id="page-6">
-    <h1>Minimum Weekly Budget</h1>
-    <label for="budget">What is your minimum weekly budget?</label>
-    <select id="budget" name="budget">
+    <label for="budget">Budget:</label>
+    <select id="budget" name="budget" required>
       <option value="25-50">$25-50</option>
       <option value="50-75">$50-75</option>
       <option value="75-250">$75-250</option>
-      <option value="250-500">$250-500</option>
       <option value="500+">$500+</option>
-    </select>
-    <button onclick="goToPage(5)">Back</button>
-    <button onclick="goToPage(7)">Next</button>
-  </div>
+    </select><br><br>
 
-  <!-- Page 7 -->
-  <div class="page" id="page-7">
-    <h1>Questions Before Payment</h1>
-    <label>You may ask up to 3 SFW questions before payment:</label>
-    <textarea id="questions" name="questions" rows="3"></textarea>
-    <button onclick="goToPage(6)">Back</button>
-    <button onclick="goToPage(8)">Next</button>
-  </div>
+    <label for="questions">Questions:</label>
+    <textarea id="questions" name="questions"></textarea><br><br>
 
-  <!-- Page 8 -->
-  <div class="page" id="page-8">
-    <h1>Age Verification</h1>
-    <p>If accepted, you must be willing to age verify immediately with an app, adult site, or redacted ID. Confirm you will age verify:</p>
-    <button onclick="goToPage(7)">Back</button>
-    <button onclick="submitForm()">Submit Application</button>
-  </div>
-
-  <!-- Submission Confirmation Page -->
-  <div class="page" id="page-9">
-    <h1>Well Done for Taking the First Step</h1>
-    <p>Welcome to the World of Miss Peach! If you are one of the lucky ones chosen, she will be in touch when it is convenient for her.</p>
-  </div>
+    <button type="submit">Submit</button>
+  </form>
 
   <script>
-    function goToPage(pageNumber) {
-      const pages = document.querySelectorAll('.page');
-      pages.forEach(page => page.classList.remove('active'));
-      document.getElementById(`page-${pageNumber}`).classList.add('active');
-    }
+    const scriptURL = "https://script.google.com/macros/s/AKfycbx3Z59yvy66nlsveTgfTl6pLkPFZGCtudTGdYyhS_4/dev";
 
-    async function submitForm() {
-      const formData = {
-        name: document.getElementById("name").value,
-        dislikes: document.getElementById("dislikes").value,
-        socials: document.getElementById("socials").value,
-        payment: document.getElementById("payment").value,
-        kinks: document.getElementById("kinks").value,
-        budget: document.getElementById("budget").value,
-        questions: document.getElementById("questions").value,
-        ageVerification: "Yes", // Assuming they reached this page
-      };
+    document.getElementById("myForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-      const scriptURL = "https://script.google.com/macros/s/AKfycbx3Z59yvy66nlsveTgfTl6pLkPFZGCtudTGdYyhS_4/dev"; // Replace with your deployed Apps Script URL
+      const formData = new FormData(this);
+      const data = {};
+
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
 
       try {
         const response = await fetch(scriptURL, {
           method: "POST",
-          body: JSON.stringify(formData),
+          body: JSON.stringify(data),
           headers: { "Content-Type": "application/json" },
         });
+
         if (response.ok) {
-          goToPage(9); // Show the confirmation page
+          alert("Form submitted successfully!");
         } else {
+          console.error("Error in submission:", response.statusText);
           alert("Submission failed. Please try again.");
         }
       } catch (error) {
+        console.error("Fetch error:", error.message);
         alert("Error: " + error.message);
       }
-    }
-
-    function redirectAway() {
-      window.location.href = "https://www.google.com";
-    }
+    });
   </script>
 </body>
 </html>
