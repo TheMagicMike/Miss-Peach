@@ -144,16 +144,16 @@
       <h1>Your Kinks</h1>
       <label for="kinks">Tell me your main kinks:</label>
       <textarea id="kinks" name="kinks" rows="3" placeholder="Feel free to be detailed" required></textarea>
-      <button type="button" onclick="showNextForm(4)">Back</button>
-      <button type="button" onclick="showNextForm(6)">Next</button>
+      <button type="button" onclick="showNextForm(1)">Back</button>
+      <button type="button" onclick="showNextForm(3)">Next</button>
     </div>
 
     <!-- Page 3 -->
     <div class="form-container" id="form-page-3">
       <h1>Dislikes and Limits</h1>
       <textarea id="dislikes" name="dislikes" rows="3" placeholder="Dislikes or limits" required></textarea>
-      <button type="button" onclick="showNextForm(1)">Back</button>
-      <button type="button" onclick="showNextForm(3)">Next</button>
+      <button type="button" onclick="showNextForm(2)">Back</button>
+      <button type="button" onclick="showNextForm(4)">Next</button>
     </div>
 
     <!-- Page 4 -->
@@ -161,8 +161,8 @@
       <h1>Your Socials</h1>
       <label for="socials">Your User Name (Reddit, X, Discord) I will use this to contact you:</label>
       <textarea id="socials" name="socials" rows="2" placeholder="e.g., @username on Discord" required></textarea>
-      <button type="button" onclick="showNextForm(2)">Back</button>
-      <button type="button" onclick="showNextForm(4)">Next</button>
+      <button type="button" onclick="showNextForm(3)">Back</button>
+      <button type="button" onclick="showNextForm(5)">Next</button>
     </div>
 
     <!-- Page 5 -->
@@ -175,8 +175,8 @@
         <option value="crypto">Crypto</option>
         <option value="loyalfans">LoyalFans</option>
       </select>
-      <button type="button" onclick="showNextForm(3)">Back</button>
-      <button type="button" onclick="showNextForm(5)">Next</button>
+      <button type="button" onclick="showNextForm(4)">Back</button>
+      <button type="button" onclick="showNextForm(6)">Next</button>
     </div>
 
     <!-- Page 6 -->
@@ -196,7 +196,7 @@
     <!-- Page 7 -->
     <div class="form-container" id="form-page-7">
       <h1>Questions Before Payment</h1>
-      <label>You may ask 3 SFW questions'</label>
+      <label>You may ask 3 SFW questions:</label>
       <textarea id="questions" name="questions" rows="3" placeholder="Optional"></textarea>
       <button type="button" onclick="showNextForm(6)">Back</button>
       <button type="button" onclick="showNextForm(8)">Next</button>
@@ -222,11 +222,17 @@
     function showNextForm(nextPage) {
       const forms = document.querySelectorAll(".form-container");
       forms.forEach((form) => form.classList.remove("active"));
-      document.getElementById(`form-page-${nextPage}`).classList.add("active");
+      const nextForm = document.getElementById(`form-page-${nextPage}`);
+      if (nextForm) {
+        nextForm.classList.add("active");
+      } else {
+        console.error(`form-page-${nextPage} does not exist.`);
+      }
     }
 
+    // Redirect if under 18
     function redirectAway() {
-      window.location.href = "https://www.google.com"; // Replace with desired redirect URL
+      window.location.href = "https://www.google.com"; // Replace with your desired URL
     }
   </script>
 </body>
