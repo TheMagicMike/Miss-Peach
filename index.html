@@ -24,7 +24,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('your-image.png');
+      background-image: url('your-image.png'); /* Replace with your image path */
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center top;
@@ -209,7 +209,7 @@
     <p>If successful, Miss Peach will be in touch when it is convenient for her.</p>
   </div>
 
-  <!-- JS Logic -->
+  <!-- JS: Navigation Logic -->
   <script>
     function showNextForm(nextPage) {
       const forms = document.querySelectorAll(".form-container");
@@ -227,14 +227,29 @@
     }
   </script>
 
+  <!-- JS: Custom Netlify Submission -->
   <script>
     document.getElementById("multiStepForm").addEventListener("submit", function(event) {
       event.preventDefault();
 
-      const containers = document.querySelectorAll(".form-container");
-      containers.forEach((c) => c.classList.remove("active"));
+      const form = this;
+      const formData = new FormData(form);
 
-      document.getElementById("form-page-9").classList.add("active");
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(() => {
+        // Show confirmation
+        const containers = document.querySelectorAll(".form-container");
+        containers.forEach((c) => c.classList.remove("active"));
+        document.getElementById("form-page-9").classList.add("active");
+      })
+      .catch((error) => {
+        alert("Submission failed! Please try again.");
+        console.error("Netlify submission error:", error);
+      });
     });
   </script>
 </body>
