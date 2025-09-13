@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Miss Peach Application</title>
   <style>
-    /* General Styles */
     body {
       font-family: 'Arial', sans-serif;
       margin: 0;
@@ -18,7 +17,6 @@
       background-color: #000;
     }
 
-    /* Animated Background Image */
     body::before {
       content: "";
       position: absolute;
@@ -26,7 +24,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('your-image.png'); /* Replace with your image URL */
+      background-image: url('your-image.png');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center top;
@@ -35,20 +33,12 @@
       filter: brightness(1.2);
     }
 
-    /* Keyframe for background movement */
     @keyframes zoomPan {
-      0% {
-        transform: scale(1.02) translateY(0%);
-      }
-      50% {
-        transform: scale(1.05) translateY(-2%);
-      }
-      100% {
-        transform: scale(1.02) translateY(1%);
-      }
+      0% { transform: scale(1.02) translateY(0%); }
+      50% { transform: scale(1.05) translateY(-2%); }
+      100% { transform: scale(1.02) translateY(1%); }
     }
 
-    /* Form Container */
     .form-container {
       background: rgba(0, 0, 0, 0.8);
       padding: 30px;
@@ -57,7 +47,7 @@
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
       width: 90%;
       max-width: 600px;
-      display: none; /* Hidden by default */
+      display: none;
       transform: scale(0.95);
       opacity: 0;
       animation: fadeIn 0.5s ease forwards;
@@ -86,9 +76,7 @@
       outline: none;
     }
 
-    textarea {
-      resize: none;
-    }
+    textarea { resize: none; }
 
     button {
       background: linear-gradient(120deg, #ff416c, #ff4b2b);
@@ -121,6 +109,7 @@
   </style>
 </head>
 <body>
+
   <!-- Age Verification -->
   <div class="form-container active" id="form-page-0">
     <h1>Adult Content Warning</h1>
@@ -129,11 +118,13 @@
     <button onclick="redirectAway()">No</button>
   </div>
 
-  <!-- Form -->
+  <!-- Multi-Step Form -->
   <form id="multiStepForm" name="multi-step-form" method="POST" data-netlify="true">
+    <input type="hidden" name="form-name" value="multi-step-form">
+
     <!-- Page 1 -->
     <div class="form-container" id="form-page-1">
-      <h1>Prefered Names</h1>
+      <h1>Preferred Names</h1>
       <label for="name">What names do you like to be called?</label>
       <input type="text" id="name" name="name" placeholder="Enter your name" required>
       <button type="button" onclick="showNextForm(2)">Next</button>
@@ -195,13 +186,13 @@
     <!-- Page 7 -->
     <div class="form-container" id="form-page-7">
       <h1>Discord is Recommended</h1>
-      <label>I am on a few findom servers, all different! Perfect for community subs. Choose one from my links page and let me know  which one/s? You joined</label>
+      <label>I am on a few findom servers, all different! Perfect for community subs. Choose one from my links page and let me know which one/s you joined</label>
       <textarea id="questions" name="questions" rows="3" placeholder="Optional"></textarea>
       <button type="button" onclick="showNextForm(6)">Back</button>
       <button type="button" onclick="showNextForm(8)">Next</button>
     </div>
 
-    <!-- Age Verification -->
+    <!-- Page 8 -->
     <div class="form-container" id="form-page-8">
       <h1>How will you age verify?</h1>
       <p>1. Send a tip on Loyalfans. 2. Join any of my Discord servers with redacted ID or Yoti. 3. Download the Yoti app and Age verify anonymously there and send me the confirmation.</p>
@@ -210,14 +201,14 @@
     </div>
   </form>
 
-  <!-- Submission Confirmation -->
+  <!-- Confirmation Page (Page 9) -->
   <div class="form-container" id="form-page-9">
     <h1>Application Submitted</h1>
     <p>If successful, Miss Peach will be in touch when it is convenient for her.</p>
   </div>
 
+  <!-- Script for form logic -->
   <script>
-    // Show the next form page
     function showNextForm(nextPage) {
       const forms = document.querySelectorAll(".form-container");
       forms.forEach((form) => form.classList.remove("active"));
@@ -229,10 +220,24 @@
       }
     }
 
-    // Redirect if under 18
     function redirectAway() {
-      window.location.href = "https://www.google.com"; // Replace with your desired URL
+      window.location.href = "https://www.google.com";
     }
+  </script>
+
+  <!-- ✅ Add submission logic here -->
+  <script>
+    document.getElementById("multiStepForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const forms = document.querySelectorAll(".form-container");
+      forms.forEach((form) => form.classList.remove("active"));
+
+      const finalPage = document.getElementById("form-page-9");
+      if (finalPage) {
+        finalPage.classList.add("active");
+      }
+    });
   </script>
 </body>
 </html>
